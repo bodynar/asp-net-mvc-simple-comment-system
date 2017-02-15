@@ -1,0 +1,77 @@
+﻿@model AspNetMvc.SimpleCommentSystem.Models.News
+
+@{
+    ViewBag.Title = "ShowNews";
+}
+
+<h2>ShowNews</h2>
+
+<div class="form-horizontal">
+    <h4>News</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+    </dl>
+
+    <div class="form-horizontal">
+        Comments:
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="form-group">
+                <h4>@comment.Topic</h4>
+                <p>@comment.Message</p>
+                <p>Posted by: @comment.User.UserName</p>
+            </div>
+        }
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")       
+</p>
+<button id="btn-addCom" class="btn btn-warning">
+    Add Comment
+</button>
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#btn-addCom').click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("AddComment")',
+                    data: {
+                        newsId : '@Model.Id',
+                    },
+                    success: function(result){
+                        $('#dialogContent').html(result);
+                        $('#Dialog').modal('show');
+                    }
+                });
+            });
+        })
+    </script>
+}

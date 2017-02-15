@@ -1,0 +1,23 @@
+﻿<br/><br />
+
+<div class="form-horizontal">
+    <div class="col-md-4">
+        <button class="btn btn-block btn-success">
+            View News
+        </button>
+    </div>
+    <p>Some text</p>
+</div>
+
+
+@section scripts{
+    
+<script type="text/javascript">
+    $(function () {
+        $('button').click(function () {
+            window.location = '@Url.Action("Index","News")';
+            // or something else
+        });
+    })
+</script>
+    }

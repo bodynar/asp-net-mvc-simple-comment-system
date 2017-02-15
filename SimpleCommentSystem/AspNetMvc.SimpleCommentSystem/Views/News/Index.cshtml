@@ -1,0 +1,33 @@
+﻿@using AspNetMvc.SimpleCommentSystem.Models
+@model IList<NewsDetailsViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+                                            <br/><br />
+<a href="@Url.Action("Create")">Create New </a><br /><br />
+<div class="form-horizontal">
+
+    @for(var i = 0; i < Model.Count; i ++)
+    {       
+        <div class="row">
+            <div class="col-md-4">
+                <h2><a href="@Url.Action("ShowNews", new { @id = Model[i].Id })">@Model[i].Subject
+                    </a></h2>
+                <p><strong>Posted by</strong>: @Model[i].User.UserName</p>
+                <p>Comments: @Model[i].CommentsCount</p>
+            </div>
+            @*<div class="col-md-4">
+                <h2>@Model[i+1].Subject</h2>
+                <p><strong>Posted by</strong>: @Model[i+1].User.UserName</p>
+                <p>Comments: @Model[i+1].CommentsCount</p>
+            </div>
+            <div class="col-md-4">
+                <h2>@Model[i+2].Subject</h2>
+                <p><strong>Posted by</strong>: @Model[i+2].User.UserName</p>
+                <p>Comments: @Model[i+2].CommentsCount</p>
+            </div>*@
+        </div>
+    }
+
+</div>
