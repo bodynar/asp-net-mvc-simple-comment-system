@@ -16,6 +16,7 @@
     using Models;
     #endregion
 
+
     public class NewsController : Controller
     {
 
@@ -60,10 +61,12 @@
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Create()
             => View();
 
         [HttpPost]
+        [Authorize]
         public ActionResult Create(NewsAddViewModel vm)
         {
             var news = Mapper.Map<NewsAddViewModel, News>(vm);
@@ -76,7 +79,7 @@
 
             return RedirectToAction("Index");
         }
-
+        [Authorize]
         public ActionResult AddComment(Guid? newsId)
         {
             if (!newsId.HasValue)
@@ -94,6 +97,7 @@
 
 
         [HttpPost]
+        [Authorize]
         public ActionResult AddComment(CommentAddViewModel vm)
         {
             var comment = Mapper.Map<CommentAddViewModel, Comment>(vm);
